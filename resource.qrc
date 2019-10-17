@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file alias="home">resources/home.png</file>
+        <file alias="manipulator">resources/manipulator.png</file>
+        <file alias="picture">resources/picture.png</file>
+        <file alias="off">resources/led-off.png</file>
+        <file alias="on">resources/led-on.png</file>
+        <file alias="error">resources/led-red.png</file>
+    </qresource>
+</RCC>
