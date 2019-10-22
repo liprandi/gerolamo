@@ -23,15 +23,24 @@ SOURCES += \
     main.cpp \
     hmi.cpp \
     piinfo.cpp \
-    hx711.cpp
+    hx711.cpp \
+    rtthread.cpp \
+    debugwidget.cpp \
+    zcontrol.cpp \
+    stepper.cpp
 
 HEADERS += \
     hmi.h \
     piinfo.h \
-    hx711.h
+    hx711.h \
+    rtthread.h \
+    debugwidget.h \
+    zcontrol.h \
+    stepper.h
 
 FORMS += \
-    hmi.ui
+    hmi.ui \
+    debugwidget.ui
 
 
 # Default rules for deployment.

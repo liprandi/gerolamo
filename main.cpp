@@ -1,16 +1,19 @@
 #include "hmi.h"
+#include "zcontrol.h"
+#include "piinfo.h"
 
 #include <QApplication>
 #include <QDebug>
-#include "piinfo.h"
 
-static PiInfo info;
+// static PiInfo info;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    ZControl ctrl;
     Hmi w;
-    w.show();
-    return a.exec();
+    w.show(); // showFullScreen();
+    int ret = a.exec();
+
+    return ret;
 }
