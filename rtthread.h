@@ -13,7 +13,7 @@ public:
     void stop();
     virtual void run() = 0;
     static void *func(void *arg);
-    static void sleep_until(struct timespec *ts, int delay);
+    static void sleep_until(struct timespec *ts, int64_t delay);
 protected:
     [[ noreturn ]] static void panic(const std::string& msg);
 private:

@@ -62,14 +62,17 @@ void * RtThread::func(void *arg)
     return nullptr;
 }
 // Adds "delay" nanoseconds to timespecs and sleeps until that time
-void RtThread::sleep_until(struct timespec *ts, int delay)
+void RtThread::sleep_until(struct timespec *ts, int64_t delay)
 {
-    ts->tv_nsec += delay;
+    int64_t sec = delay / 1000L*1000L*1000L;
+    int64_t nsec = delay %  1000L*1000L*1000L;
+    ts->tv_nsec += long(nsec);
     if(ts->tv_nsec > 1000*1000*1000)
     {
         ts->tv_nsec -= 1000*1000*1000;
-        ts->tv_sec++;
+        sec++;
     }
+    ts->tv_sec += long(sec);
     clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, ts,  nullptr);
 }
 
