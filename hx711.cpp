@@ -83,7 +83,7 @@ void Hx711::run()
                 resetChip();
             }
         }
-        sleep_until(&ts, 100 * 1000 * 1000);    // 100 msec
+        sleep_until(&ts, (100L * 1000L * 1000L));    // 100 msec
     }
 }
 // read the values of chips

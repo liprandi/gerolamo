@@ -132,8 +132,8 @@
   <widget class="QPushButton" name="pbQuit">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>320</y>
+     <x>370</x>
+     <y>10</y>
      <width>99</width>
      <height>30</height>
     </rect>
@@ -256,6 +256,165 @@
    </property>
    <property name="text">
     <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>190</y>
+     <width>471</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>210</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Posição motor de passo:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_dbg_posStepper">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>208</y>
+     <width>120</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Panel</enum>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>236</y>
+     <width>117</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Posição de destino [°]:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_dbg_targetStepper">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>232</y>
+     <width>125</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDial" name="dial_dbg_Stepper">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>200</y>
+     <width>171</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>3600</number>
+   </property>
+   <property name="tracking">
+    <bool>true</bool>
+   </property>
+   <property name="wrapping">
+    <bool>true</bool>
+   </property>
+   <property name="notchTarget">
+    <double>3600.000000000000000</double>
+   </property>
+   <property name="notchesVisible">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>264</y>
+     <width>114</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Velocidade [°/sec]:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_dbg_speed">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>260</y>
+     <width>125</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>290</y>
+     <width>122</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Aceleração [°/sec2]:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_dbg_accel">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>286</y>
+     <width>125</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_dbg_jerk">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>316</y>
+     <width>125</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>320</y>
+     <width>129</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>empurrão [°/sec3]:</string>
    </property>
   </widget>
  </widget>

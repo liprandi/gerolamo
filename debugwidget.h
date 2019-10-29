@@ -17,6 +17,9 @@ public:
 
     void paintEvent(QPaintEvent *event);
 public slots:
+    void moveStepper();
+    void setStepper();
+public slots:
     void quit();
 private:
     void updateHx711();
@@ -24,6 +27,7 @@ private:
 private:
     Ui::DebugWidget *ui;
     QTimer* m_timer;
+    double m_stepperParam[3];
 };
 
 #endif // DEBUGWIDGET_H

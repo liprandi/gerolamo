@@ -2,6 +2,7 @@
 #include <wiringPi.h>
 
 Hx711* ZControl::g_hx711 = nullptr;
+Stepper* ZControl::g_stepper = nullptr;
 
 ZControl::ZControl()
 {
@@ -9,7 +10,7 @@ ZControl::ZControl()
         exit(-1);
     setupGpio();
     g_hx711 = new Hx711(4, 14, 15, 18);
-
+    g_stepper = new Stepper(13, 15, 11, 16);
 }
 ZControl::~ZControl()
 {

@@ -20,13 +20,14 @@ Stepper::Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault):
     m_gpioenable = gpioenable;      // output enable signal
     m_gpiofault = gpiofault;        // input fault signal
     m_offset = 0.;                  // offset value to convert pulse in deg
-    m_gain = 1.8 / 4. / 16.;        // gain value to convert pulse in deg
+    m_gain = 4. * 16. / 1.8;        // gain value to convert pulse in deg
     m_currentPosition = 0.;         // current position [pulse]
     m_targetPosition = 0.;          // target position [pulse]
     m_override = 100;               // speed 100%
-    setParameters(100, 50, 25);
+    setParameters(30, 5, 0.2);
     setLimits(0, 270);
     m_refered = false;              // axis refered
+    start();
 }
 
 Stepper::~Stepper()
@@ -36,9 +37,9 @@ Stepper::~Stepper()
 // set parameter for dynamic movement
 void Stepper::setParameters(double speed, double accel, double jerk)
 {
-    m_speed = speed * m_gain + m_offset;
-    m_accel = accel * m_gain + m_offset;
-    m_jerk = jerk * m_gain + m_offset;
+    m_speed = speed * m_gain;
+    m_accel = accel * m_gain;
+    m_jerk = jerk * m_gain;
 
     if(m_jerk > 0 && m_accel > 0)
     {
@@ -66,96 +67,143 @@ void Stepper::setParameters(double speed, double accel, double jerk)
     }
 
 }
+// read parameters setted
+void Stepper::getParameters(double& speed, double& accel, double& jerk)
+{
+    speed = double(m_speed) / m_gain;
+    accel = double(m_accel) / m_gain;
+    jerk = double(m_jerk) / m_gain;
+}
+
 // set limit position
 void Stepper::setLimits(double minPosition, double maxPosition)
 {
     m_minPosition = minPosition * m_gain + m_offset;
     m_maxPosition = maxPosition * m_gain + m_offset;
 }
+bool Stepper::go(double target)
+{
+    return go(long(target * m_gain + m_offset));
+}
+bool Stepper::go(long position)
+{
+    bool ret = false;
+    if(!m_running && position != m_currentPosition)
+    {
+        if(position >= m_minPosition && position <= m_maxPosition)
+        {
+            ret = calcPulse(position);
+            if(ret)
+                m_targetPosition = position;
+        }
+    }
+    return ret;
+}
+
 // return time in nsec for next pulse
-bool Stepper::calcPulse()
+bool Stepper::calcPulse(long position)
 {
     bool ret = false;
 
-    unsigned distance = unsigned(abs(m_targetPosition - m_startPosition));
-    double jerk[2] = {m_currentJerk, 0};
-    double accel[2] = {m_currentAccel, 0};
-    double speed[2] = {m_currentSpeed, 0};
-    unsigned minSpace = 2 * m_accelPulse + 2 * m_jerkPulse[0] + 2 * m_jerkPulse[1];
-    if(distance >= minSpace)
-    for(unsigned pulse = 0; pulse < distance; pulse++)
+    m_path.clear();
+    unsigned distance = unsigned(abs(position - m_currentPosition));
+
+    double t[3] = {0.5, 0.5, 0.5};
+    double v[3] = {1/t[0], 1/t[1], 1/t[2]};
+    double a[2] = {0., 0.};
+    double j = 0.;
+    for(unsigned pulse = 0; pulse < ((distance + 1) / 2); pulse++)
     {
-        unsigned neg = distance - pulse;
-        if(speed[0] < m_speed)
+        if(pulse < (distance / 4))
         {
-            if(pulse < m_jerkPulse)
+            if(v[0] < m_speed)
             {
-                jerk[0] = m_jerk;
-                accel[0] += jerk[0];
+                j = m_jerk;
+                a[1] = a[0];
+                a[0] = m_jerk * t[0] + a[1];
+                if(a[0] > m_accel)
+                {
+                    a[0] = m_accel;
+                    j = 0;
+                }
+                v[2] = v[1];
+                v[1] = v[0];
+                v[0] = a[0] * t[0] + v[1];
+                if(v[0] > m_speed)
+                {
+                    v[0] = m_speed;
+                    a[0] = 0;
+                    j = 0;
+                }
+                t[2] = t[1];
+                t[1] = t[0];
+                t[0] = 1 / v[0];
             }
             else
             {
-                accel[0] = m_accel;
-                jerk[0] = 0;
+                t[2] = t[1];
+                t[1] = t[0];
+                t[0] = 1 / m_speed;
+                v[2] = v[1];
+                v[1] = v[0];
+                v[0] = m_speed;
+                a[1] = a[0];
+                a[0] = 0.;
+                j = 0;
             }
-            speed[0] += accel[0];
-            if(speed[0] > m_speed)
-                speed[0] = m_speed;
         }
-    }
-    if(m_targetPosition != m_currentPosition)
-    {
-        long diff = m_targetPosition - m_currentPosition;
-        if(diff > 0)
+        else
         {
-            if(abs(m_currentSpeed - m_speed) < 0.1)
+            if(v[0] < m_speed)
             {
-                if(diff > (2 * m_jerkPulse + m_accelPulse))
+                j = -m_jerk;
+                a[1] = a[0];
+                a[0] = j * t[0] + a[1];
+                if(a[0] < 0)
                 {
-                    // normal course at maximum speed
-                    m_currentSpeed = m_speed;
-                    m_currentAccel = 0;
-                    m_currentJerk = 0;
-                    ret = long(1e9/m_speed);
+                    a[0] = 0;
+                    j = 0;
                 }
-                else
+                v[2] = v[1];
+                v[1] = v[0];
+                v[0] = a[0] * t[0] + v[1];
+                if(v[0] > m_speed)
                 {
-                    // slew down
-                    if(diff > (m_jerkPulse + m_accelPulse))
-                    {
-                        // first slew down jerk
-                        m_currentJerk = -m_jerk;
-                        double deltaTime = pow(6. / m_jerk, 1./3.);
-                        m_currentAccel += m_currentJerk * deltaTime;
-                        m_currentSpeed += 1./2. * m_currentJerk * deltaTime * deltaTime;
-                        ret = long((deltaTime + sqrt(2. / m_currentAccel) + 1 / m_currentSpeed) * 1e9);
-                    }
-                    else
-                    {
-                        if(diff > m_jerkPulse)
-                        {
-                            // ramp down
-                            m_currentJerk = 0;
-                            m_currentAccel = -m_accel;
-                            double deltaTime = sqrt(2. / m_accel);
-                            m_currentSpeed += m_currentAccel * deltaTime;
-                            ret = long(deltaTime * 1e9);
-                        }
-                        else
-                        {
-                            // second slew down jerk
-                            m_currentJerk = -m_jerk;
-                            double deltaTime = pow(6. / m_jerk, 1./3.);
-                            m_currentAccel += m_currentJerk * deltaTime;
-                            m_currentSpeed += 1./2. * m_currentJerk * deltaTime * deltaTime;
-                            ret = long(deltaTime * 1e9);
-                        }
-                    }
+                    v[0] = m_speed;
+                    a[0] = 0;
+                    j = 0;
+                }
+                else if (v[0] < 2)
+                {
+                    v[0] = 2;
+                    a[0] = 0;
+                    j = 0;
                 }
 
+                t[2] = t[1];
+                t[1] = t[0];
+                t[0] = 1 / v[0];
+            }
+            else
+            {
+                t[2] = t[1];
+                t[1] = t[0];
+                t[0] = 1 / m_speed;
+                v[2] = v[1];
+                v[1] = v[0];
+                v[0] = m_speed;
+                a[1] = a[0];
+                a[0] = 0.;
+                j = 0;
             }
         }
+        m_path[pulse] = int64_t(t[0] * 1e9);
+        if(pulse < (distance - pulse - 1))
+        {
+            m_path[distance - pulse - 1] = int64_t(t[0] * 1e9);
+        }
     }
+    ret = (m_path.size() == distance);
     return ret;
 }
 // stepper task
@@ -175,35 +223,32 @@ void Stepper::run()
         {
             if(!m_running)
             {
-                m_startPosition = m_currentPosition;
                 m_direction = m_targetPosition > m_currentPosition;
                 m_currentAccel = 0;
                 m_currentJerk = 0;
                 m_indexPath = 0;
-                m_running = calcPulse();
-                if(m_running)
-                {
-                    digitalWrite(m_gpioenable, 1);
-                    clock_gettime(CLOCK_MONOTONIC, &ts);
-                }
+                digitalWrite(m_gpioenable, 1);
+                digitalWrite(m_gpiodir, m_direction);
+                usleep(100000);
+                clock_gettime(CLOCK_MONOTONIC, &ts);
+                m_running = true;
             }
             if(m_running)
             {
-                digitalWrite(m_gpiodir, m_direction);
                 m_pulse = !m_pulse;
                 digitalWrite(m_gpiopulse, m_pulse);
                 if(m_indexPath < m_path.size())
                 {
                     auto t = m_path[m_indexPath++];
-                    m_currentSpeed = t.speed;
-                    m_currentAccel = t.accel;
-                    m_currentJerk = t.jerk;
+                 // m_currentSpeed = t.speed;
+                 // m_currentAccel = t.accel;
+                 // m_currentJerk = t.jerk;
                     if(m_direction)
                         m_currentPosition++;
                     else
                         m_currentPosition--;
-                    t.delay *= 100L / m_override;
-                    sleep_until(&ts, t.delay);
+                    t *= 100L / m_override;
+                    sleep_until(&ts, t);
                 }
                 else
                 {
@@ -218,6 +263,7 @@ void Stepper::run()
         }
         else
         {
+            m_running = false;
             usleep(500000); //500 msec
             digitalWrite(m_gpioenable, 0);
         }

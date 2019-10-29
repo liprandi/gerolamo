@@ -10,22 +10,19 @@
 
 class Stepper: public RtThread
 {
-    struct pulseInfo
-    {
-        int64_t delay;      // delay to next step
-        double speed;       // speed of this step
-        double accel;       // accel of this step
-        double jerk;        // jerk of this step
-    };
-
 public:
     Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault);
     virtual ~Stepper();
     void run();
 
     void setParameters(double speed, double accel, double jerk);
+    void getParameters(double& speed, double& accel, double& jerk);
     void setLimits(double minPosition, double maxPosition);
-    bool calcPulse(); // return true if was able to calculate path
+    bool go(double target);
+    double getPosition() const {return (m_currentPosition - m_offset) / m_gain;}
+private:
+    bool go(long position);
+    bool calcPulse(long position); // return true if was able to calculate path
 private:
     int m_gpiodir;            // output direction signal
     int m_gpiopulse;          // output pulse signal
@@ -39,7 +36,6 @@ private:
     double m_currentSpeed;    // current speed [pulse/sec]
     double m_currentAccel;    // current accel [pulse/sec2]
     double m_currentJerk;     // current accel [pulse/sec3]
-    long m_startPosition;     // target position [pulse]
     long m_targetPosition;     // target position [pulse]
     double m_minPosition;     // limit min position [pulse]
     double m_maxPosition;     // limit max position [pulse]
@@ -57,7 +53,7 @@ private:
     bool   m_running;         // the motor is running
     unsigned m_indexPath;       // index of current path running
     int64_t m_override;       // [10-100] override
-    std::vector<pulseInfo> m_path;    // pulse time list
+    std::map<unsigned, int64_t> m_path;    // pulse time list
 };
 
 #endif // STEPPER_H
