@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Hx711Config</class>
+ <widget class="QWidget" name="Hx711Config">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>732</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>38</x>
+     <y>30</y>
+     <width>621</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Configuração Modulos Hx711 para celulas de carga</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GPIO output para signal de CLK:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_gpioclk">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>80</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>----------</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO02</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO03</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO04</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO05</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO06</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO09</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO10</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO11</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO13</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO14</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO15</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO17</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO19</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO20</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO21</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO22</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO23</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO24</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO25</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO26</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO27</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>80</y>
+     <width>224</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GPIO input signal de DATA modulo 1:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_gpiodata1">
+   <property name="geometry">
+    <rect>
+     <x>603</x>
+     <y>80</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>----------</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO02</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO03</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO04</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO05</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO06</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO09</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO10</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO11</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO13</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO14</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO15</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO17</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO19</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO20</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO21</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO22</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO23</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO24</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO25</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO26</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO27</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QComboBox" name="cb_gpiodata2">
+   <property name="geometry">
+    <rect>
+     <x>603</x>
+     <y>110</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>----------</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO02</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO03</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO04</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO05</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO06</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO09</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO10</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO11</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO13</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO14</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO15</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO17</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO19</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO20</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO21</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO22</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO23</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO24</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO25</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO26</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO27</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>110</y>
+     <width>224</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GPIO input signal de DATA modulo 2:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>140</y>
+     <width>224</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GPIO input signal de DATA modulo 2:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cb_gpiodata3">
+   <property name="geometry">
+    <rect>
+     <x>603</x>
+     <y>140</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>----------</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO02</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO03</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO04</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO05</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO06</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO09</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO10</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO11</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO13</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO14</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO15</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO17</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO19</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO20</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO21</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO22</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO23</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO24</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO25</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO26</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>GPIO27</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Offset Hx711 modulo 1 [bits] :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>210</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Offset Hx711 modulo 2 [bits] :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>240</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Offset Hx711 modulo 3 [bits] :</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_offset1">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>180</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string>00000009</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_offset2">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>210</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string>00000009</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_offset3">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>240</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string>00000009</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_gain1">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>180</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_gain3">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>240</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>180</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gain Hx711 modulo 1 [bits/N] :</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="le_gain2">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>210</y>
+     <width>113</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>240</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gain Hx711 modulo 3 [bits/N] :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>210</y>
+     <width>201</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gain Hx711 modulo 2 [bits/N] :</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

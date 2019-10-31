@@ -184,7 +184,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="iconSize">
          <size>
@@ -266,6 +266,65 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="config">
+         <attribute name="title">
+          <string>Configuração</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QTabWidget" name="tabWidget">
+            <property name="tabShape">
+             <enum>QTabWidget::Rounded</enum>
+            </property>
+            <widget class="QWidget" name="hx711">
+             <attribute name="title">
+              <string>Hx711</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="Hx711Config" name="cnf_hx711" native="true"/>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_3">
+             <attribute name="title">
+              <string>Tab 2</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -279,6 +338,12 @@
    <class>DebugWidget</class>
    <extends>QWidget</extends>
    <header location="global">debugwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Hx711Config</class>
+   <extends>QWidget</extends>
+   <header location="global">hx711config.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

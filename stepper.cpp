@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "math.h"
 
-Stepper::Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault):
+Stepper::Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault, int gpioforward, int gpiobackward):
     RtThread(20)
 {
     pinMode(gpiodir, INPUT);
@@ -12,6 +12,8 @@ Stepper::Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault):
     pinMode(gpioenable, INPUT);
     pinMode(gpioenable, OUTPUT);
     pinMode(gpiofault, INPUT);
+    pinMode(gpioforward, INPUT);
+    pinMode(gpiobackward, INPUT);
 
     m_gain = 16 * 4 / 1.8;          // convert deg -> pulse. Redutor de 16, motor 1.8 deg for pulse, drive x4
     m_offset = 0.;                  // in pulse value
@@ -19,6 +21,8 @@ Stepper::Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault):
     m_gpiopulse = gpiopulse;        // output pulse signal
     m_gpioenable = gpioenable;      // output enable signal
     m_gpiofault = gpiofault;        // input fault signal
+    m_gpioforward = gpioforward;    // input signal for forward position
+    m_gpiobackward = gpiobackward;  // input signal for backward position
     m_offset = 0.;                  // offset value to convert pulse in deg
     m_gain = 4. * 16. / 1.8;        // gain value to convert pulse in deg
     m_currentPosition = 0.;         // current position [pulse]
@@ -235,6 +239,10 @@ void Stepper::run()
             }
             if(m_running)
             {
+                if(digitalRead(m_gpioforward) || digitalRead(m_gpiobackward))
+                {
+
+                }
                 m_pulse = !m_pulse;
                 digitalWrite(m_gpiopulse, m_pulse);
                 if(m_indexPath < m_path.size())

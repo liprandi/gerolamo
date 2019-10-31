@@ -7,4 +7,7 @@
         <file alias="on">resources/led-on.png</file>
         <file alias="error">resources/led-red.png</file>
     </qresource>
+    <qresource prefix="/sheets">
+        <file alias="dark">resources/dark.stylesheet</file>
+    </qresource>
 </RCC>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>358</height>
+    <width>732</width>
+    <height>408</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -132,8 +132,8 @@
   <widget class="QPushButton" name="pbQuit">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>10</y>
+     <x>620</x>
+     <y>370</y>
      <width>99</width>
      <height>30</height>
     </rect>
@@ -343,9 +343,6 @@
    </property>
    <property name="notchTarget">
     <double>3600.000000000000000</double>
-   </property>
-   <property name="notchesVisible">
-    <bool>false</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_11">

@@ -11,7 +11,7 @@
 class Stepper: public RtThread
 {
 public:
-    Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault);
+    Stepper(int gpiodir, int gpiopulse, int gpioenable, int gpiofault, int gpioforward, int gpiobackward);
     virtual ~Stepper();
     void run();
 
@@ -28,6 +28,9 @@ private:
     int m_gpiopulse;          // output pulse signal
     int m_gpioenable;         // output enable signal
     int m_gpiofault;          // input fault signal
+    int m_gpioforward;        // input signal for forward position
+    int m_gpiobackward;       // input signal for backward position
+
     // values in deg for general purpose
     double m_offset;          // offset value to convert pulse in deg
     double m_gain;            // gain value to convert pulse in deg

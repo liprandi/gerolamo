@@ -27,7 +27,9 @@ SOURCES += \
     rtthread.cpp \
     debugwidget.cpp \
     zcontrol.cpp \
-    stepper.cpp
+    stepper.cpp \
+    zconfig.cpp \
+    hx711config.cpp
 
 HEADERS += \
     hmi.h \
@@ -36,11 +38,14 @@ HEADERS += \
     rtthread.h \
     debugwidget.h \
     zcontrol.h \
-    stepper.h
+    stepper.h \
+    zconfig.h \
+    hx711config.h
 
 FORMS += \
     hmi.ui \
-    debugwidget.ui
+    debugwidget.ui \
+    hx711config.ui
 
 
 # Default rules for deployment.

@@ -29,8 +29,6 @@ public:
     void setValues();
     void resetChip();
 private:
-    [[ noreturn ]] void panic(const std::string& msg);
-private:
     int m_numOfChannels;                              // num of chnnels read
     int m_gpioClk;                                    // output pin used for clock
     int m_gpioData[k_maxChn];                         // inputs pins used for read
